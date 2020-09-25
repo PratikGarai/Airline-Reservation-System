@@ -1,2 +1,2 @@
 # Airline-Reservation-System
-A simple airline resevation system
+A simple airline resevation system using Django Framework
