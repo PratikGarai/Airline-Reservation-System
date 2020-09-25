@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
 from . import forms
 from . import models 
 
@@ -34,3 +35,25 @@ def register(request):
 
 
     return render(request, "FormPage.html", { "title":"Registration", "form":forms.UserForm, "error":False, "error_msg":"" })
+
+
+def login_view(request):
+    
+    if request.user.is_authenticated:
+        return render(request, "MessagePage.html", {"title": "Error", "message": "You are already logged in!"})
+
+    if request.method=="POST":
+        user_form = forms.UserLoginForm(data = request.POST)
+
+        username = user_form.username
+        password = user_form.password
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active():
+                return render(request, "MessagePage.html", {"title": "Success", "message": "You have successfully logged in!"})
+
+        return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":True, "error_msg":"Invalid credentials" })
+    
+    return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":False, "error_msg":"" })
