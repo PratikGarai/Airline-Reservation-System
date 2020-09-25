@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from . import forms
 from . import models 
 
@@ -43,17 +44,27 @@ def login_view(request):
         return render(request, "MessagePage.html", {"title": "Error", "message": "You are already logged in!"})
 
     if request.method=="POST":
-        user_form = forms.UserLoginForm(data = request.POST)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-        username = user_form.username
-        password = user_form.password
+        print(username, password)
 
         user = authenticate(username=username, password=password)
 
         if user:
-            if user.is_active():
+            if user.is_active:
+                login(request, user)
                 return render(request, "MessagePage.html", {"title": "Success", "message": "You have successfully logged in!"})
+
+            else :
+                return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":True, "error_msg":"Inactive User" })
 
         return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":True, "error_msg":"Invalid credentials" })
     
     return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":False, "error_msg":"" })
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return render(request, "MessagePage.html", {"title": "Bye!", "message": "You have successfully logged out!"})
