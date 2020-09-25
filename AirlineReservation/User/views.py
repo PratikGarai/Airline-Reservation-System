@@ -22,13 +22,14 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)
             p = models.Passenger()
-            Passenger.user = user
-            Passenger.save()
+            p.user = user
+            p.save()
              
             return render(request, "MessagePage.html", {"title": "Success", "message": "You have successfully registered!"})
 
         else:
-            return render(request, "RegistrationForm.html", { "form":UserForm, "error":True, "error_msg":"Form Invalid!" })
+            print(user_form.errors)
+            return render(request, "FormPage.html", { "title":"Registration" ,"form":forms.UserForm, "error":True, "error_msg":"Form Invalid!" })
 
 
-        return render(request, "RegistrationForm.html", { "form":UserForm, "error":False, "error_msg":"" })
+    return render(request, "FormPage.html", { "title":"Registration", "form":forms.UserForm, "error":False, "error_msg":"" })
