@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from forms import UserForm
-from models import Passenger
+from . import forms
+from . import models 
 
 def landing(request):
     
@@ -21,7 +21,7 @@ def register(request):
         if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
-            p = Passenger()
+            p = models.Passenger()
             Passenger.user = user
             Passenger.save()
              
