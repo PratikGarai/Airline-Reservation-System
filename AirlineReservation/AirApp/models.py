@@ -16,13 +16,18 @@ class Flight(models.Model):
     source = models.CharField(max_length=10, choices = locations)
     destination = models.CharField(max_length=10, choices = locations)
     capacity = models.PositiveIntegerField()
-    vacancy = models.PositiveIntegerField()
+    vacancy = models.PositiveIntegerField(blank=True,default=None)
     departure = models.DateTimeField()
     reach = models.DateTimeField()
 
     def vacancy_change(self, n):
         self.vacancy += n
         self.save()
+
+    def save(self):
+        if self.vacancy==None:
+            self.vacancy = self.capacity
+        super().save()
 
 class Ticket(models.Model):
 
