@@ -18,17 +18,24 @@ class Flight(models.Model):
     capacity = models.PositiveIntegerField()
     vacancy = models.PositiveIntegerField()
     departure = models.DateTimeField()
-    duration = models.DurationField()
+    reach = models.DateTimeField()
+
+    def vacancy_change(self, n):
+        self.vacancy += n
+        self.save()
 
 class Ticket(models.Model):
 
-    passenger = models.ForeignKey(Passenger, realted_name='tickets', on_delete=models.CASCADE)
+    passenger = models.ForeignKey(Passenger, related_name='tickets', on_delete=models.CASCADE)
     n_passenger = models.PositiveIntegerField()
     flight = models.ForeignKey(Flight, related_name='bookings',on_delete=models.CASCADE)
     number = models.CharField(max_length=10, blank = False)
-    source = models.CharField(max_length=10, choices = locations)
-    destination = models.CharField(max_length=10, choices = locations)
     booked_at = models.DateTimeField(auto_now = True)
 
+    def save(self):
+        self.flight.vacancy_change(-self.n_passenger)
+        super().save()
+
     def delete(self):
-        self.flight.vacancy(self.n_passenger)
+        self.flight.vacancy_change(self.n_passenger)
+        super().delete()
