@@ -19,6 +19,7 @@ class Flight(models.Model):
     vacancy = models.PositiveIntegerField(blank=True,default=None)
     departure = models.DateTimeField()
     reach = models.DateTimeField()
+    price_per_head = models.PositiveIntegerField()
 
     def vacancy_change(self, n):
         self.vacancy += n
