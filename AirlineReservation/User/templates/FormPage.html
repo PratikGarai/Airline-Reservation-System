@@ -4,6 +4,7 @@
 		<title>{{title}}</title>
 	</head>
 	<body>
+	{% include "navigation.html" %}
 		{% if error %}
 			<p> {{error_msg}} </p>
 		{% endif %}
