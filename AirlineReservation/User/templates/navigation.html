@@ -1,8 +1,11 @@
 <nav>
 	<ul>
 		<li><a href = "/">Home</a></li>
+		{% if user.is_authenticated %}
+		<li><a href = '{% url  "User:Logout" %}'>Logout</a></li>
+		{% else %}
 		<li><a href = '{% url  "User:Register" %}'>Register</a></li>
 		<li><a href = '{% url  "User:Login" %}'>Login</a></li>
-		<li><a href = '{% url  "User:Logout" %}'>Logout</a></li>
+		{% endif %}
 	</ul>
 </nav>
