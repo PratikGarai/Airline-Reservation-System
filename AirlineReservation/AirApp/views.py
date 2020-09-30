@@ -55,3 +55,7 @@ def flush_data(request):
         return redirect("/flights/")
     else:
         return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to view this page!"}) 
+
+@login_required
+def profile_page(request):
+    return render(request, "ProfilePage.html", {"title":"Your Profile"})

@@ -2,6 +2,7 @@
 	<ul>
 		<li><a href = "/">Home</a></li>
 		{% if user.is_authenticated %}
+			<li><a href = '{% url  "App:Profile" %}'>View Profile</a></li>
 			<li><a href = '{% url  "User:Logout" %}'>Logout</a></li>
 			{% if user.is_superuser %}
 			<li><a href = '{% url "App:AddFlight" %}'>Add a Flight</a></li>
