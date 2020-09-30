@@ -5,7 +5,7 @@
 	{% endif %}
 	<form method="POST">
 		{% csrf_token %}
-		{{ form.as_p }}
+		{{ form.as_table }}
 		<input type="submit" />
 	</form>
 	<script>

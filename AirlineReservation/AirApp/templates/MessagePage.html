@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>{{title}}</title>
-	</head>
-	<body>
-	{% include "navigation.html" %}
+{% extends "Template.html" %}
+{% block body_block %}
 		{{message}}
-	</body>
-</html>
+{% endblock %}

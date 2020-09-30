@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title> {{title}} </title>
-	</head>
-	<body>
-		{% include 'navigation.html' %}
-		{% if flight_list|length == 0 %}
+{% extends "Template.html" %}
+{% block body_block %}
+	{% if flight_list|length == 0 %}
 		<h1> No flights in this section </h1>
-		{% else %}
+	{% else %}
 		{% for flight in flight_list %}
 		<div class = "flight-div">
 			<h1> Number : {{ flight.number }} </h1>
@@ -15,6 +10,5 @@
 			<p> {{ flight.vacancy }} seats left out of {{ flight.capacity }} </p>
 		</div>
 		{% endfor %}
-		{% endif %}
-	</body>
-</html>
+	{% endif %}
+{% endblock %}
