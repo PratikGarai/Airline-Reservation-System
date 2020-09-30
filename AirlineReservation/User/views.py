@@ -32,10 +32,10 @@ def register(request):
 
         else:
             print(user_form.errors)
-            return render(request, "FormPage.html", { "title":"Registration" ,"form":forms.UserForm, "error":True, "error_msg":"Form Invalid!" })
+            return render(request, "FormPage.html", { "title":"Registration" ,"form":forms.UserForm, "error":True, "error_msg":["Form Invalid!"] })
 
 
-    return render(request, "FormPage.html", { "title":"Registration", "form":forms.UserForm, "error":False, "error_msg":"" })
+    return render(request, "FormPage.html", { "title":"Registration", "form":forms.UserForm, "error":False, "error_msg":[] })
 
 
 def login_view(request):
@@ -55,11 +55,11 @@ def login_view(request):
                 return render(request, "MessagePage.html", {"title": "Success", "message": "You have successfully logged in!"})
 
             else :
-                return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":True, "error_msg":"Inactive User" })
+                return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":True, "error_msg":["Inactive User"] })
 
-        return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":True, "error_msg":"Invalid credentials" })
+        return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":True, "error_msg":["Invalid credentials"] })
     
-    return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":False, "error_msg":"" })
+    return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":False, "error_msg":[] })
 
 
 @login_required
