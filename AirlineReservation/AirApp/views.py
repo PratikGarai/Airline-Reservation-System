@@ -13,7 +13,6 @@ def flight_full_list(request):
 
 @login_required
 def addFlight(request):
-    print(timezone.now())
     if request.user.is_superuser :
         if request.method=='POST':
             flight = forms.FlightAddForm(data = request.POST)
@@ -38,7 +37,7 @@ def addFlight(request):
                 return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":True, "error_msg":errors})
 
             flight.save().save()
-            return redirect("/flights")
+            return redirect("/flights/")
 
         return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":False, "error_msg":[]})
     else:
@@ -47,3 +46,12 @@ def addFlight(request):
 @login_required
 def bookticket(request, flight_id):
     return render(request, "FormPage.html", {"title":"Booking", "form":forms.TicketForm, "error":False, "error_msg":[]})
+
+@login_required
+def flush_data(request):
+    if request.user.is_superuser:
+        models.Flight.objects.all().delete()
+        models.Ticket.objects.all().delete()
+        return redirect("/flights/")
+    else:
+        return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to view this page!"}) 

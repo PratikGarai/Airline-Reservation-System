@@ -5,6 +5,7 @@
 			<li><a href = '{% url  "User:Logout" %}'>Logout</a></li>
 			{% if user.is_superuser %}
 			<li><a href = '{% url "App:AddFlight" %}'>Add a Flight</a></li>
+			<li><a href = '{% url "App:Flush" %}'>Flush All Data</a></li>
 			{% endif %}
 		{% else %}
 			<li><a href = '{% url  "User:Register" %}'>Register</a></li>
