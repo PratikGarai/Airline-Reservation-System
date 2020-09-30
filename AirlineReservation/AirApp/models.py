@@ -40,6 +40,7 @@ class Ticket(models.Model):
 
     def save(self):
         self.flight.vacancy_change(-self.n_passenger)
+        self.totalPrice = self.flight.price_per_head * self.n_passenger
         super().save()
 
     def delete(self):

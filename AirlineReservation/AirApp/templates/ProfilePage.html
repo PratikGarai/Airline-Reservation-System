@@ -18,12 +18,12 @@
 				<tr><td>Flight No.</td><td>{{ i.flight.number }}</td></tr>
 				<tr><td>Passengers</td><td>{{ i.n_passengers }}</td></tr>
 				<tr><td>Booking Time</td><td>{{ i.booked_at }}</td></tr>
-				<tr><td>Price</td><td>{{ i.flight.price_per_head*i.n_passengers }}</td></tr>
+				<tr><td>Price</td><td>{{ i.totalPrice }}</td></tr>
 			</table>
 		</div>
 	{% endfor %}
 {% else %}
-	<h5> No tickets book yet...<br> Book now and let's travel!</h5>
+	<h3> No tickets book yet...<br> Book now and let's travel!</h3>
 {% endif %}
 
 {% endblock %}
