@@ -11,3 +11,8 @@ class TicketForm(forms.ModelForm):
     class Meta :
         model = models.Ticket
         fields = ('n_passenger',)
+
+class FlightAddForm(forms.ModelForm):
+    class Meta :
+        model = models.Flight
+        fields = '__all__'

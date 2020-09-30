@@ -2,10 +2,13 @@
 	<ul>
 		<li><a href = "/">Home</a></li>
 		{% if user.is_authenticated %}
-		<li><a href = '{% url  "User:Logout" %}'>Logout</a></li>
+			<li><a href = '{% url  "User:Logout" %}'>Logout</a></li>
+			{% if user.is_superuser %}
+			<li><a href = '{% url "App:AddFlight" %}'>Add a Flight</a></li>
+			{% endif %}
 		{% else %}
-		<li><a href = '{% url  "User:Register" %}'>Register</a></li>
-		<li><a href = '{% url  "User:Login" %}'>Login</a></li>
+			<li><a href = '{% url  "User:Register" %}'>Register</a></li>
+			<li><a href = '{% url  "User:Login" %}'>Login</a></li>
 		{% endif %}
 		<li><a href = '{% url "App:FullList" %}'>Full List of Flights</a></li>
 	</ul>
