@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from . import forms
 from . import models
+from User.models import Passenger
 
 def landing(request):
     return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":False, "error_msg":[]})
@@ -58,4 +59,11 @@ def flush_data(request):
 
 @login_required
 def profile_page(request):
-    return render(request, "ProfilePage.html", {"title":"Your Profile"})
+    if request.user.is_superuser:
+        return redirect('admin/')
+    else:
+        passenger = Passenger.objects.all().filter(user=request.user)[0]
+        if passenger:
+            return render(request, "ProfilePage.html", {"title":"Your Profile", "passenger" : passenger})
+        else:
+            return render(request, "MessagePage.html", {"title":"Not found", "message":"User not found"})
