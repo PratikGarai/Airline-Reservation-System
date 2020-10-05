@@ -37,6 +37,7 @@ class Ticket(models.Model):
     flight = models.ForeignKey(Flight, related_name='bookings',on_delete=models.CASCADE)
     number = models.CharField(max_length=10, blank = False)
     booked_at = models.DateTimeField(auto_now = True)
+    n_passenger = models.PositiveIntegerField(default=0)
 
     def save(self):
         self.flight.vacancy_change(-self.n_passenger)
