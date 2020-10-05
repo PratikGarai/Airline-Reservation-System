@@ -11,3 +11,6 @@ urlpatterns = [
         path('data/flush', views.flush_data , name="Flush"),
         path('profile', views.profile_page, name="Profile")
 ]
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()

@@ -85,6 +85,6 @@ DATETIME_INPUT_FORMATS = ['%d/%m/%Y %H:%M' ]
 
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ( os.path.join('static'), )
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'), )
 
 LOGIN_URL = '/accounts/login'
