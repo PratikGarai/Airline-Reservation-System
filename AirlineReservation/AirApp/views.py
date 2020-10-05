@@ -62,7 +62,7 @@ def bookticket(request, flight_id):
             ticket.passenger = passenger
             ticket.n_passenger = n_booking
             ticket.flight = flight
-            ticket.number = str(time.time())[:-12]
+            ticket.number = str(time.time()).replace('.', '')[-12:]
             ticket.save()
             return render(request, "MessagePage.html", {"title":"Booked", "message":"Your ticket has been succesfully booked"})
         else:
