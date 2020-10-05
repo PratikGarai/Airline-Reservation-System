@@ -9,7 +9,10 @@ import time
 
 
 def landing(request):
+    if request.method=='POST':
+        return render(request, "FlightList.html", { "flight_list": models.Flight.objects.all() })
     return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":False, "error_msg":[]})
+
 
 def flight_full_list(request):
     return render(request, "FlightList.html", { "flight_list": models.Flight.objects.all() })
