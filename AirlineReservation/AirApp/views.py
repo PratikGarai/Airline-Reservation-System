@@ -5,12 +5,15 @@ from django.shortcuts import redirect
 from . import forms
 from . import models
 from User.models import Passenger
+import time
+
 
 def landing(request):
     return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":False, "error_msg":[]})
 
 def flight_full_list(request):
     return render(request, "FlightList.html", { "flight_list": models.Flight.objects.all() })
+
 
 @login_required
 def addFlight(request):
@@ -44,6 +47,7 @@ def addFlight(request):
     else:
         return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to view this page!"}) 
 
+
 @login_required
 def bookticket(request, flight_id):
     if request.method=='POST':
@@ -53,10 +57,18 @@ def bookticket(request, flight_id):
             n_booking = ticket_form.cleaned_data['n_passenger']
             if n_booking>flight.vacancy:
                 return render(request, "MessagePage.html", {"title":"Error", "message":"Number of bookings exceeds vacancy!"})
+            passenger = Passenger.objects.all().filter(user = request.user)[0]
+            ticket = models.Ticket()
+            ticket.passenger = passenger
+            ticket.n_passenger = n_booking
+            ticket.flight = flight
+            ticket.number = time.time()
+            ticket.save()
             return render(request, "MessagePage.html", {"title":"Booked", "message":"Your ticket has been succesfully booked"})
         else:
             return render(request, "MessagePage.html", {"title":"Error!", "message":"Form Corrupted"})
     return render(request, "FormPage.html", {"title":"Booking", "form":forms.TicketForm, "error":False, "error_msg":[]})
+
 
 @login_required
 def flush_data(request):
@@ -66,6 +78,7 @@ def flush_data(request):
         return redirect("/flights/")
     else:
         return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to view this page!"}) 
+
 
 @login_required
 def profile_page(request):
