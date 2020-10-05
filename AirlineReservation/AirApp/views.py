@@ -46,6 +46,16 @@ def addFlight(request):
 
 @login_required
 def bookticket(request, flight_id):
+    if request.method=='POST':
+        flight = models.Flight.objects.all().filter(pk=flight_id)[0]
+        ticket_form = forms.TicketForm(request.POST)
+        if ticket_form.is_valid() and flight:
+            n_booking = ticket_form.cleaned_data['n_passenger']
+            if n_booking>flight.vacancy:
+                return render(request, "MessagePage.html", {"title":"Error", "message":"Number of bookings exceeds vacancy!"})
+            return render(request, "MessagePage.html", {"title":"Booked", "message":"Your ticket has been succesfully booked"})
+        else:
+            return render(request, "MessagePage.html", {"title":"Error!", "message":"Form Corrupted"})
     return render(request, "FormPage.html", {"title":"Booking", "form":forms.TicketForm, "error":False, "error_msg":[]})
 
 @login_required

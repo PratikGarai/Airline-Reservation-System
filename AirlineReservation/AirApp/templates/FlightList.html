@@ -9,9 +9,9 @@
 			<p> {{ flight.source }} to {{ flight.destination }} </p>
 			<p> {{ flight.vacancy }} seats left out of {{ flight.capacity }} </p>
 			{% if flight.vacancy == 0 %}
-				<a class="btn btn-deactivated">Seats Full</a>
+				<a class="btn btn-light">Seats Full</a>
 			{% else %}
-				<a href="/book/{{ flight.pk }}" class="btn">Book now</a>
+				<a href="/book/{{ flight.pk }}" class="btn btn-success">Book now</a>
 			{% endif %}
 		</div>
 		{% endfor %}
