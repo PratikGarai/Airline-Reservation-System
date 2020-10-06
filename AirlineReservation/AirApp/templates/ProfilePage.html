@@ -10,16 +10,18 @@
 </div>
 <br>
 <h3>Tickets: </h3>
+<hr><br>
 {% if passenger.tickets.all|length %}
 	{% for i in passenger.tickets.all %}
 		<div class="container ticketblock">
+			<h5>Ticket No.  {{ i.number }}</h5>
 			<table class="table">
-				<tr><td>Ticket No.  </td><td>{{ i.number }}</td></tr>
 				<tr><td>Flight No.  </td><td>{{ i.flight.number }}</td></tr>
 				<tr><td>Passengers  </td><td>{{ i.n_passenger }}</td></tr>
 				<tr><td>Booking Time  </td><td>{{ i.booked_at }}</td></tr>
 				<tr><td>Price  </td><td>{{ i.totalPrice }}</td></tr>
 			</table>
+			<a class="btn btn-danger" href="/cancelTicket/{{i.pk}}">Cancel</a>
 		</div>
 		<hr>
 	{% endfor %}

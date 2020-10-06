@@ -107,3 +107,14 @@ def profile_page(request):
             return render(request, "ProfilePage.html", {"title":"Your Profile", "passenger" : passenger})
         else:
             return render(request, "MessagePage.html", {"title":"Not found", "message":"User not found"})
+
+
+@login_required
+def cancelTicket(request, pk):
+    ticket = models.Ticket.objects.all().filter(pk = pk)[0]
+    if ticket.passenger.user != request.user:
+        return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"Ticket does not belong to your account."})
+    if request.method=="POST":
+        ticket.delete()
+        return redirect('profile/')
+    return render(request, "ConfirmationDelete.html", {})
