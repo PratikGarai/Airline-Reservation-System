@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from . import forms
@@ -52,7 +52,13 @@ def login_view(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return render(request, "MessagePage.html", {"title": "Success", "message": "You have successfully logged in!"})
+
+                nxt = request.GET.get('next', '')
+
+                if nxt!='':
+                    return redirect(nxt)
+                else:
+                    return render(request, "MessagePage.html", {"title": "Success", "message": "You have successfully logged in!"})
 
             else :
                 return render(request, "FormPage.html", { "title":"Login", "form":forms.UserLoginForm, "error":True, "error_msg":["Inactive User"] })

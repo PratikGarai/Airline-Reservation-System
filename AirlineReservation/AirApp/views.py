@@ -12,11 +12,13 @@ def landing(request):
     if request.method=='POST':
         filterform = forms.FlightFilterForm(request.POST)
         if filterform.is_valid():
+            # custom validation begins
             source = filterform.cleaned_data['source']
             destination = filterform.cleaned_data['destination']
             errors = []
             if(source==destination):
                 errors.append("Source and destination are the same")
+
             if errors==[]:
                 return render(request, "FlightList.html", { "flight_list": models.Flight.objects.all().filter(source=source).filter(destination=destination) })
             else :
