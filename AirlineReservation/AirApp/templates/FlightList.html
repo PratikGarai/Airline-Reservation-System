@@ -5,9 +5,20 @@
 	{% else %}
 		{% for flight in flight_list %}
 		<div class = "flight-div">
-			<h1> Number : {{ flight.number }} </h1>
+			<h1> Flight {{ flight.number }} </h1>
 			<p> {{ flight.source }} to {{ flight.destination }} </p>
+			<table class="table times">
+				<tr>
+					<td> Departure : </td>
+					<td> {{flight.departure}} </td>
+				</tr>
+				<tr>
+					<td> Reach : </td>
+					<td> {{flight.reach}} </td>
+				</tr>
+			</table>
 			<p> {{ flight.vacancy }} seats left out of {{ flight.capacity }} </p>
+			<p> Price per head : Rs. <span class="price"> {{flight.price_per_head}} </span></p>
 			{% if flight.vacancy == 0 %}
 				<a class="btn btn-light">Seats Full</a>
 			{% else %}
