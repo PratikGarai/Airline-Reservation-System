@@ -10,7 +10,7 @@ urlpatterns = [
         path('book/<int:flight_id>', views.bookticket, name="Booking"),
         path('data/flush', views.flush_data , name="Flush"),
         path('profile', views.profile_page, name="Profile"),
-        path('cancelTicket/<int:pk>', views.profile_page, name="Cancellation")
+        path('cancelTicket/<int:pk>', views.cancelTicket, name="Cancellation")
 ]
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

@@ -116,5 +116,5 @@ def cancelTicket(request, pk):
         return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"Ticket does not belong to your account."})
     if request.method=="POST":
         ticket.delete()
-        return redirect('profile/')
+        return redirect('/profile')
     return render(request, "ConfirmationDelete.html", {})
