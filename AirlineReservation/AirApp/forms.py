@@ -5,7 +5,6 @@ from . import models
 class FlightFilterForm(forms.Form):
     source = forms.CharField(widget = forms.Select(choices = models.locations))
     destination = forms.CharField(widget = forms.Select(choices = models.locations))
-    date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
 
 class TicketForm(forms.ModelForm):
     class Meta :

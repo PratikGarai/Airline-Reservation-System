@@ -10,7 +10,19 @@ import time
 
 def landing(request):
     if request.method=='POST':
-        return render(request, "FlightList.html", { "flight_list": models.Flight.objects.all() })
+        filterform = forms.FlightFilterForm(request.POST)
+        if filterform.is_valid():
+            source = filterform.cleaned_data['source']
+            destination = filterform.cleaned_data['destination']
+            errors = []
+            if(source==destination):
+                errors.append("Source and destination are the same")
+            if errors==[]:
+                return render(request, "FlightList.html", { "flight_list": models.Flight.objects.all().filter(source=source).filter(destination=destination) })
+            else :
+                return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":True, "error_msg":errors})
+        else:
+            return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":True, "error_msg":["Corrupted Form"]})
     return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":False, "error_msg":[]})
 
 
