@@ -1,3 +1,9 @@
 body{
-	background-image: url('F:/Airline-Reservation-System/AirlineReservation/static/img/airline1.jpg')	
+	background-image: url('/static/img/airline1.jpg') no-repeat center center fixed; 
+  background-size: cover; 
+}
+
+form.custom-form-css
+{
+	margin:100px;
 }

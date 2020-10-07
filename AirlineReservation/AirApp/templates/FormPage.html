@@ -9,7 +9,7 @@
 	{% endif %}
 	<form method="POST">
 		{% csrf_token %}
-		{{ form.as_table }}
+		{{ form.as_p }}
 		<input type="submit" />
 	</form>
 	<script>
@@ -24,5 +24,9 @@
       				format: 'd/m/Y H:i',
     			});
   		});
+		$(document).ready(function(){
+			formClass("ticket")
+		});
+		
 	</script>
 {% endblock %}
