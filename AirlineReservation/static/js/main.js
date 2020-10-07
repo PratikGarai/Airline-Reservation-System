@@ -21,8 +21,8 @@ function formClass(formName){
 			$("#id_reach").addClass("Reach");
 			$("#id_price_per_head").addClass("Price");
 		case "ticket":
-			//$("#id_n_passenger").prev().val("Number of Passengers");
-			//console.log($("#id_n_passenger"));
+			const label = $("#id_n_passenger").prev()[0];
+			label.textContent = "Number of Passengers";
 	}
 
 }

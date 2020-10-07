@@ -22,10 +22,10 @@ def landing(request):
             if errors==[]:
                 return render(request, "FlightList.html", { "flight_list": models.Flight.objects.all().filter(source=source).filter(destination=destination) })
             else :
-                return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":True, "error_msg":errors})
+                return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":True, "error_msg":errors, "formName":"HomePage"})
         else:
-            return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":True, "error_msg":["Corrupted Form"]})
-    return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":False, "error_msg":[]})
+            return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":True, "error_msg":["Corrupted Form"], "formName":"HomePage"})
+    return render(request, "FormPage.html", {"title":"Welcome!", "form":forms.FlightFilterForm, "error":False, "error_msg":[], "formName":"HomePage"})
 
 
 def flight_full_list(request):
@@ -52,21 +52,23 @@ def addFlight(request):
                 if flight.cleaned_data['departure']>=flight.cleaned_data['reach']:
                     errors.append("Depature earlier than reahing time")
             else:
-                return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":True, "error_msg":["Corrupted form"]})
+                return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":True, "error_msg":["Corrupted form"], "formName":"AddFlight"})
 
             if len(errors)>0:
-                return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":True, "error_msg":errors})
+                return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":True, "error_msg":errors, "formName":"AddFlight"})
 
             flight.save().save()
             return redirect("/flights/")
 
-        return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":False, "error_msg":[]})
+        return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":False, "error_msg":[], "formName":"AddFlight"})
     else:
         return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to view this page!"}) 
 
 
 @login_required
 def bookticket(request, flight_id):
+    if request.user.is_superuser:
+        return render(request, "MessagePage.html", {"title":"Not allowed", "message":"Superuser is not allowed to book tickets :("}) 
     if request.method=='POST':
         flight = models.Flight.objects.all().filter(pk=flight_id)[0]
         ticket_form = forms.TicketForm(request.POST)
@@ -84,7 +86,7 @@ def bookticket(request, flight_id):
             return render(request, "MessagePage.html", {"title":"Booked", "message":"Your ticket has been succesfully booked"})
         else:
             return render(request, "MessagePage.html", {"title":"Error!", "message":"Form Corrupted"})
-    return render(request, "FormPage.html", {"title":"Booking", "form":forms.TicketForm, "error":False, "error_msg":[]})
+    return render(request, "FormPage.html", {"title":"Booking", "form":forms.TicketForm, "error":False, "error_msg":[], "formName":"ticket"})
 
 
 @login_required
