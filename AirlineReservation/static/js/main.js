@@ -11,6 +11,7 @@ function formClass(formName){
 		case "Login": 
 			$("#id_username").addClass("Username");
 			$("#id_password").addClass("Password");
+			break;
 		case "AddFlight":
 			$("#id_number").addClass("Number");	
 			$("#id_source").addClass("Source");
@@ -20,6 +21,7 @@ function formClass(formName){
 			$("#id_departure").addClass("Departure");
 			$("#id_reach").addClass("Reach");
 			$("#id_price_per_head").addClass("Price");
+			break;
 		case "ticket":
 			const label = $("#id_n_passenger").prev()[0];
 			label.textContent = "Number of Passengers";

@@ -119,4 +119,15 @@ def cancelTicket(request, pk):
     if request.method=="POST":
         ticket.delete()
         return redirect('/profile')
-    return render(request, "ConfirmationDelete.html", {})
+    return render(request, "ConfirmationDelete.html", { "message":"Are you sure you want to delete this ticket? ", "cancelLink":"/profile"})
+
+@login_required
+def deleteFlight(request, pk):
+    if request.user.is_superuser:
+        flight = models.Flight.objects.all().filter(pk = pk)[0]
+        if request.method=="POST":
+            flight.delete()
+            return redirect('/flights')
+        return render(request, "ConfirmationDelete.html", { "message":"Are you sure you want to delete the flight : "+str(flight.number), "cancelLink":"/flights"})
+    else:
+        return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to do perform this action!."})

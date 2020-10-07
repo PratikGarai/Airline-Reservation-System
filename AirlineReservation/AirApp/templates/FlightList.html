@@ -19,10 +19,14 @@
 			</table>
 			<p> {{ flight.vacancy }} seats left out of {{ flight.capacity }} </p>
 			<p> Price per head : Rs. <span class="price"> {{flight.price_per_head}} </span></p>
-			{% if flight.vacancy == 0 %}
-				<a class="btn btn-light">Seats Full</a>
+			{% if user.is_superuser %}
+			<a class="btn btn-danger" href="/deleteFlight/{{flight.pk}}">Delete</a>
 			{% else %}
-				<a href="/book/{{ flight.pk }}" class="btn btn-success">Book now</a>
+				{% if flight.vacancy == 0 %}
+					<a class="btn btn-light">Seats Full</a>
+				{% else %}
+					<a href="/book/{{ flight.pk }}" class="btn btn-success">Book now</a>
+				{% endif %}
 			{% endif %}
 		</div>
 		{% endfor %}
