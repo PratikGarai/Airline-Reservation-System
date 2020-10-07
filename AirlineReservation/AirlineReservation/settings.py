@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 SECRET_KEY = 'if(iw-0a__5wxjm#ay55d76eo6wx(@xx@7yg$aie5&6=b7fhrk'
 DEBUG = True
 
@@ -51,7 +51,7 @@ WSGI_APPLICATION = 'AirlineReservation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR , 'db.sqlite3'),
     }
 }
 
