@@ -1,14 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #66ffcc;">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6a22a1;">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   	<div class="collapse navbar-collapse" id="navbarText">
 	<ul class="navbar-nav mr-auto">
-		<li class="nav-item"><a class="nav-link" href = "/">Home</a></li>
-		<li class="nav-item"><a class="nav-link" href = '{% url "App:FullList" %}'>Full List of Flights</a></li>
+		<li class="nav-item"><a class="nav-link nav-link-custom" href = "/">Home</a></li>
+		<li class="nav-item"><a class="nav-link nav-link-custom" href = '{% url "App:FullList" %}'>Full List of Flights</a></li>
 		{% if user.is_superuser %}
-			<li class="nav-item"><a class="nav-link" href = '{% url "App:AddFlight" %}'>Add a Flight</a></li>
-			<li class="nav-item"><a class="nav-link" href = '{% url "App:Flush" %}'>Flush All Data</a></li>
+			<li class="nav-item"><a class="nav-link nav-link-custom" href = '{% url "App:AddFlight" %}'>Add a Flight</a></li>
+			<li class="nav-item"><a class="nav-link nav-link-custom" href = '{% url "App:Flush" %}'>Flush All Data</a></li>
 			{% endif %}
 	</ul>
 		{% if user.is_authenticated %}
@@ -24,8 +24,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-default"
           aria-labelledby="navbarDropdownMenuLink-333">
-          <a class="dropdown-item" href = '{% url  "App:Profile" %}'>View Profile</a>
-          <a class="dropdown-item" href = '{% url  "User:Logout" %}'>Logout</a>
+          <a class="dropdown-item nav-link-custom" href = '{% url  "App:Profile" %}'>View Profile</a>
+          <a class="dropdown-item nav-link-custom" href = '{% url  "User:Logout" %}'>Logout</a>
         </div>
     	</li>
     	</ul>
