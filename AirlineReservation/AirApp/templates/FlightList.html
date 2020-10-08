@@ -5,9 +5,9 @@
 	{% else %}
 		{% for flight in flight_list %}
 		<div class = "flight-div">
-			<h1> Flight {{ flight.number }} </h1>
-			<p> {{ flight.source }} to {{ flight.destination }} </p>
-			<table class="table times">
+			<h1 style="font-family: serif; margin-top:30px;"> Flight {{ flight.number }} </h1>
+			<p style="color:green; font-size: 20px;"> {{ flight.source }} to {{ flight.destination }} </p>
+			<table class="table times" style="border-style: double;border-radius: 35px;">
 				<tr>
 					<td> Departure : </td>
 					<td> {{flight.departure}} </td>
@@ -16,9 +16,17 @@
 					<td> Reach : </td>
 					<td> {{flight.reach}} </td>
 				</tr>
+			
+			<tr> 
+				<td>Vacancy: </td>
+				<td>{{ flight.vacancy }} seats left out of {{ flight.capacity }}</td>
+			</tr>
+			<tr>
+				<td> Price per head : </td>
+				<td><span class="price"> Rs. {{flight.price_per_head}} </span>
+				</td>
+			</tr>
 			</table>
-			<p> {{ flight.vacancy }} seats left out of {{ flight.capacity }} </p>
-			<p> Price per head : Rs. <span class="price"> {{flight.price_per_head}} </span></p>
 			{% if user.is_superuser %}
 			<a class="btn btn-danger" href="/deleteFlight/{{flight.pk}}">Delete</a>
 			{% else %}

@@ -1,7 +1,7 @@
 {% extends "Template.html" %}
 {% block body_block %}
 
-<h1> Your profile </h1>
+<h1 style="font-family: arial; margin-top: 30px;"> Your profile </h1>
 <div class="userinfoblock">
 	<p>
 		Username : {{ passenger.user.username }}<br>
@@ -9,13 +9,13 @@
 	</p>
 </div>
 <br>
-<h3>Tickets: </h3>
+<h3 style="font-family: georgia;">Tickets: </h3>
 <hr><br>
 {% if passenger.tickets.all|length %}
 	{% for i in passenger.tickets.all %}
 		<div class="container ticketblock">
-			<h5>Ticket No.  {{ i.number }}</h5>
-			<table class="table">
+			<h5 style="font-family: consolas;">Ticket No.  {{ i.number }}</h5>
+			<table class="table" style="border-style: double;border-radius: 35px;">
 				<tr><td>Flight No.  </td><td>{{ i.flight.number }}</td></tr>
 				<tr><td>Passengers  </td><td>{{ i.n_passenger }}</td></tr>
 				<tr><td>Booking Time  </td><td>{{ i.booked_at }}</td></tr>
@@ -26,7 +26,7 @@
 		<hr>
 	{% endfor %}
 {% else %}
-	<h3> No tickets book yet...<br> Book now and let's travel!</h3>
+	<h4 style="font-family: lucida console; background-color: #ffff66; padding: 25px; border-radius: 10px;"> No tickets booked yet...<br> Book now and let's travel!</h4>
 {% endif %}
 
 {% endblock %}

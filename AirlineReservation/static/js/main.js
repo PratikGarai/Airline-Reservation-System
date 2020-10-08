@@ -7,6 +7,9 @@ function formClass(formName){
 	$("input[type='submit']").addClass("col-sm-12 col-md-8 btn article-btn btn-primary");
 	$(".helptext").addClass("form-text text-muted");
 	$("select").addClass("form-control");
+	$(".custom-form-css").css({"border-style": "ridge","margin":"100px",
+	"padding":"50px", "border-radius":"10px"});
+	$("form").wrapOuter("<h1>Hello</h1>");
 	switch(formName){
 		case "Login": 
 			$("#id_username").addClass("Username");
