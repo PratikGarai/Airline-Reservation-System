@@ -28,7 +28,8 @@
 			</tr>
 			</table>
 			{% if user.is_superuser %}
-			<a class="btn btn-danger" href="/deleteFlight/{{flight.pk}}">Delete</a>
+				<a class="btn btn-danger" href="/deleteFlight/{{flight.pk}}">Delete</a>
+				<a class="btn btn-primary" href="/editFlight/{{flight.pk}}">Edit</a>
 			{% else %}
 				{% if flight.vacancy == 0 %}
 					<a class="btn btn-light">Seats Full</a>

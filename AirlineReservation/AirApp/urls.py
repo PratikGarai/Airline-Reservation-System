@@ -11,7 +11,8 @@ urlpatterns = [
         path('data/flush', views.flush_data , name="Flush"),
         path('profile', views.profile_page, name="Profile"),
         path('cancelTicket/<int:pk>', views.cancelTicket, name="Cancellation"),
-        path('deleteFlight/<int:pk>', views.deleteFlight, name="DeleteFlight")
+        path('deleteFlight/<int:pk>', views.deleteFlight, name="DeleteFlight"),
+        path('editFlight/<int:pk>', views.editFlight, name="EditFlight"),
 ]
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

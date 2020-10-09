@@ -131,3 +131,38 @@ def deleteFlight(request, pk):
         return render(request, "ConfirmationDelete.html", { "message":"Are you sure you want to delete the flight : "+str(flight.number), "cancelLink":"/flights"})
     else:
         return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to do perform this action!."})
+
+
+@login_required
+def editFlight(request, pk):
+    if request.user.is_superuser :
+        flight_instance = models.Flight.objects.all().filter(pk = pk)[0]
+        if request.method=='POST':
+            flight = forms.FlightAddForm(data = request.POST, instance = flight_instance)
+            errors = []
+
+            if flight.is_valid():
+                # custom validation begins
+                if flight.cleaned_data['source']==flight.cleaned_data['destination'] :
+                    errors.append("Source and destination are the same")
+                if flight.cleaned_data['capacity']==0:
+                    errors.append("Capacity of flight is 0")
+                if flight.cleaned_data['vacancy']>flight.cleaned_data['capacity']:
+                    errors.append("Vacancy in flight is more than capacity")
+                if flight.cleaned_data['vacancy']==0:
+                    errors.append("Flight capacity is 0")
+                if flight.cleaned_data['departure']>=flight.cleaned_data['reach']:
+                    errors.append("Depature earlier than reahing time")
+            else:
+                return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm(instance = flight_instance), "error":True, "error_msg":["Corrupted form"], "formName":"AddFlight"})
+
+            if len(errors)>0:
+                return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm(instance = flight_instance), "error":True, "error_msg":errors, "formName":"AddFlight"})
+
+            flight.save().save()
+            return redirect("/flights/")
+
+        return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm(instance = flight_instance) , "error":False, "error_msg":[], "formName":"AddFlight"})
+    else:
+        return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to view this page!"}) 
+
