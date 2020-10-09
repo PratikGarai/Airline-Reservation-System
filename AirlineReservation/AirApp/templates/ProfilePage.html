@@ -15,6 +15,7 @@
 	{% for i in passenger.tickets.all %}
 		<div class="container ticketblock">
 			<h5 style="font-family: consolas;">Ticket No.  {{ i.number }}</h5>
+			{{i.flight.source}} to {{i.flight.destination}} 
 			<table class="table" style="border-style: double;border-radius: 35px;">
 				<tr><td>Flight No.  </td><td>{{ i.flight.number }}</td></tr>
 				<tr><td>Passengers  </td><td>{{ i.n_passenger }}</td></tr>

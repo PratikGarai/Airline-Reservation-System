@@ -14,13 +14,14 @@
   		<script src=" {% static 'js/main.js' %}" type="text/javascript"></script>
 		<link rel="stylesheet" href=" {% static 'css/navigation.css' %}" />
 		<style>
-			body{
+			.image-div-main{
 				background: url("/static/img/airline1.jpg") no-repeat center center fixed; 
   				background-size: cover; 
 			}
 		</style>
 	</head>
 	<body>
+		<div class="image-div-main"></div>
 		<h1 style="text-align: center; font-family: comic sans MS; margin-top: 70px; margin-bottom: 20px;">Airline Reservation System</h1>
 		{% include "navigation.html" %}
 		<div class="container main-body-block">
