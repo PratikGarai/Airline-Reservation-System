@@ -3,6 +3,28 @@
 	{% load static %}
 	<head>
 		<title>{{title}}</title>
+		<style type="text/css">
+			.footer {
+			   position:fixed;
+			   padding:10px;
+			   left: 0;
+			   bottom: 0;
+			   width: 100%;
+			   background-color: #000066;
+			   color: white;
+			   text-align: center;
+			}
+			form{
+				opacity:1;
+			}
+			html,body{
+				height:100%;
+			}
+		    .view { 
+		    	min-height: 100% 
+		    }
+
+		</style>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -22,12 +44,54 @@
 	</head>
 	<body>
 		<!-- <div id="image-div-main"></div> -->
-		<h1 id="main-heading" style="text-align: center; font-family: comic sans MS; margin-top: 70px; margin-bottom: 20px;">Airline Reservation System</h1>
+	
+	
 		{% include "navigation.html" %}
+		<div class="view" style="background:url('/static/img/cloud.jpg'); background-repeat: no-repeat; background-position: center center;background-size:cover;">
+
 		<div class="container main-body-block">
 			{% block body_block %}
 			{% endblock %}
 		</div>
 		
+		</div>
+		<div class="footer">
+			  <div class="container-fluid text-center text-md-left">
+	<h4 style="text-align: center; color:grey" class="text-uppercase font-weight-bold">Made by</h4>
+	
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+
+        <h5 class="text-uppercase font-weight-bold">Pratik Garai</h5>
+        <p>Collaborate with me on <a href="https://github.com/PratikGarai">https://github.com/PratikGarai</a></p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mb-md-0 mb-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase font-weight-bold">Ritika Sarkar</h5>
+        <p>Collaborate with me on <a href="https://github.com/ritikasarkar18">https://github.com/ritikasarkar18</a></p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+
+		</div>
 	</body>
+	
 </html>
