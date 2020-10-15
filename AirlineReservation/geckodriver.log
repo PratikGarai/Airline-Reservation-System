@@ -121,3 +121,10 @@ console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Err
 
 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
 
+1602745276706	geckodriver	INFO	Listening on 127.0.0.1:61874
+1602745279791	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\PRATIK~1\\AppData\\Local\\Temp\\rust_mozprofilew5ln3v"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1602745283339	Marionette	INFO	Listening on port 61882
+1602745283475	Marionette	WARN	TLS certificate errors will be ignored for this session
