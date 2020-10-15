@@ -1,7 +1,9 @@
 {% extends "Template.html" %}
 {% block body_block %}
 	{% if flight_list|length == 0 %}
-		<h1> No flights in this section </h1>
+		<div>
+		<h1 style="padding-top:40px;font-family: sans-serif;"> No flights in this section </h1>
+		</div>
 	{% else %}
 		{% for flight in flight_list %}
 		<div class = "flight-div">
