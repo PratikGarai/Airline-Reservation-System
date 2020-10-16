@@ -12,13 +12,11 @@ def landing(request):
     if request.method=='POST':
         filterform = forms.FlightFilterForm(request.POST)
         if filterform.is_valid():
-            # custom validation begins
             source = filterform.cleaned_data['source']
             destination = filterform.cleaned_data['destination']
             errors = []
             if(source==destination):
                 errors.append("Source and destination are the same")
-
             if errors==[]:
                 return render(request, "FlightList.html", { "flight_list": models.Flight.objects.all().filter(source=source).filter(destination=destination) })
             else :
@@ -38,9 +36,7 @@ def addFlight(request):
         if request.method=='POST':
             flight = forms.FlightAddForm(data = request.POST)
             errors = []
-
             if flight.is_valid():
-                # custom validation begins
                 if flight.cleaned_data['source']==flight.cleaned_data['destination'] :
                     errors.append("Source and destination are the same")
                 if flight.cleaned_data['capacity']==0:
@@ -53,13 +49,10 @@ def addFlight(request):
                     errors.append("Depature earlier than reahing time")
             else:
                 return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":True, "error_msg":["Corrupted form"], "formName":"AddFlight"})
-
             if len(errors)>0:
                 return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":True, "error_msg":errors, "formName":"AddFlight"})
-
             flight.save().save()
             return redirect("/flights/")
-
         return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":False, "error_msg":[], "formName":"AddFlight"})
     else:
         return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to view this page!"}) 
@@ -121,6 +114,7 @@ def cancelTicket(request, pk):
         return redirect('/profile')
     return render(request, "ConfirmationDelete.html", { "message":"Are you sure you want to delete this ticket? ", "cancelLink":"/profile"})
 
+
 @login_required
 def deleteFlight(request, pk):
     if request.user.is_superuser:
@@ -140,9 +134,7 @@ def editFlight(request, pk):
         if request.method=='POST':
             flight = forms.FlightAddForm(data = request.POST, instance = flight_instance)
             errors = []
-
             if flight.is_valid():
-                # custom validation begins
                 if flight.cleaned_data['source']==flight.cleaned_data['destination'] :
                     errors.append("Source and destination are the same")
                 if flight.cleaned_data['capacity']==0:
@@ -165,4 +157,3 @@ def editFlight(request, pk):
         return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm(instance = flight_instance) , "error":False, "error_msg":[], "formName":"AddFlight"})
     else:
         return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to view this page!"}) 
-
