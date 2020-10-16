@@ -16,7 +16,7 @@ def landing(request):
             destination = filterform.cleaned_data['destination']
             errors = []
             if(source==destination):
-                errors.append("Source and destination are the same")
+                errors.append("Source and destination are the same.")
             if errors==[]:
                 return render(request, "FlightList.html", { "flight_list": models.Flight.objects.all().filter(source=source).filter(destination=destination) })
             else :
@@ -38,15 +38,15 @@ def addFlight(request):
             errors = []
             if flight.is_valid():
                 if flight.cleaned_data['source']==flight.cleaned_data['destination'] :
-                    errors.append("Source and destination are the same")
+                    errors.append("Source and destination are the same.")
                 if flight.cleaned_data['capacity']==0:
-                    errors.append("Capacity of flight is 0")
+                    errors.append("Capacity of flight is 0.")
                 if flight.cleaned_data['vacancy']>flight.cleaned_data['capacity']:
-                    errors.append("Vacancy in flight is more than capacity")
+                    errors.append("Vacancy of flight is more than capacity.")
                 if flight.cleaned_data['vacancy']==0:
-                    errors.append("Flight capacity is 0")
+                    errors.append("Flight capacity is 0.")
                 if flight.cleaned_data['departure']>=flight.cleaned_data['reach']:
-                    errors.append("Depature earlier than reahing time")
+                    errors.append("Depature earlier than reahing time.")
             else:
                 return render(request, "FormPage.html", {"title":"Add Flight!", "form":forms.FlightAddForm, "error":True, "error_msg":["Corrupted form"], "formName":"AddFlight"})
             if len(errors)>0:
@@ -76,9 +76,9 @@ def bookticket(request, flight_id):
             ticket.flight = flight
             ticket.number = str(time.time()).replace('.', '')[-12:]
             ticket.save()
-            return render(request, "MessagePage.html", {"title":"Booked", "message":"Your ticket has been succesfully booked"})
+            return render(request, "MessagePage.html", {"title":"Booked", "message":"Your ticket has been succesfully booked!"})
         else:
-            return render(request, "MessagePage.html", {"title":"Error!", "message":"Form Corrupted"})
+            return render(request, "MessagePage.html", {"title":"Error!", "message":"Form Corrupted."})
     return render(request, "FormPage.html", {"title":"Booking", "form":forms.TicketForm, "error":False, "error_msg":[], "formName":"ticket"})
 
 
@@ -101,14 +101,14 @@ def profile_page(request):
         if passenger:
             return render(request, "ProfilePage.html", {"title":"Your Profile", "passenger" : passenger})
         else:
-            return render(request, "MessagePage.html", {"title":"Not found", "message":"User not found"})
+            return render(request, "MessagePage.html", {"title":"Not found", "message":"User not found!"})
 
 
 @login_required
 def cancelTicket(request, pk):
     ticket = models.Ticket.objects.all().filter(pk = pk)[0]
     if ticket.passenger.user != request.user:
-        return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"Ticket does not belong to your account."})
+        return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"Ticket does not belong to your account!"})
     if request.method=="POST":
         ticket.delete()
         return redirect('/profile')
@@ -124,7 +124,7 @@ def deleteFlight(request, pk):
             return redirect('/flights')
         return render(request, "ConfirmationDelete.html", { "message":"Are you sure you want to delete the flight : "+str(flight.number), "cancelLink":"/flights"})
     else:
-        return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to do perform this action!."})
+        return render(request, "MessagePage.html", {"title":"Unauthorised!", "message":"You are not authorised to do perform this action!"})
 
 
 @login_required

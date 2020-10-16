@@ -1,10 +1,19 @@
 {% extends "Template.html" %}
 {% block body_block %}
 	{% if error %}
-	<div class="error-block">
-		{% for i in error_msg %}
-			<li> {{i}} </li>
-		{% endfor %}
+	<div class="contaier error-block">
+		<div class="alert alert-danger">
+		{% if error_msg|length == 1 %}
+		<h4>Error : </h4>
+		{% else %}
+		<h4>Errors : </h4>
+		{% endif %}
+			<div class="contaier error-container">
+				{% for i in error_msg %}
+					{{i}}<br>
+				{% endfor %}
+			</div>
+		</div>
 	</div>
 	{% endif %}
 	<form method="POST">
