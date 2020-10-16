@@ -1,5 +1,6 @@
 *.swp
 __pycache__
 migrations
-
+.ipynb_checkpoints
+.virtual_documents
 db.sqlite3

@@ -7,8 +7,16 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'password', 'email')
 
+        widgets = {
+                'password' : forms.PasswordInput()
+        }
+
 class UserLoginForm(forms.ModelForm):
 
     class Meta :
         model = User
         fields = ('username', 'password')
+
+        widgets = {
+                'password' : forms.PasswordInput()
+        }
