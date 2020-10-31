@@ -222,12 +222,12 @@ element = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS
 source = driver.find_element(By.CSS_SELECTOR,"select#id_source")
 destination = driver.find_element(By.CSS_SELECTOR,"select#id_destination")
 button = driver.find_element(By.CSS_SELECTOR,"input.form-control:nth-child(4)")
-source.send_keys("pakistan")
-destination.send_keys("india")
+source.send_keys("india")
+destination.send_keys("germany")
 button.click()
 element = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,"div.main-body-block div.flight-div a.btn.btn-success")))
 book_button = driver.find_element(By.CSS_SELECTOR,"div.main-body-block div.flight-div a.btn.btn-success")
-txt = driver.find_element(By.CSS_SELECTOR,"div.flight-div:nth-child(1) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)").text
+txt = "100"
 passengers = int(list(txt.split(" "))[0])//10
 book_button.click()
 element = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,"input.form-control:nth-child(4)")))
@@ -268,12 +268,12 @@ element = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS
 source = driver.find_element(By.CSS_SELECTOR,"select#id_source")
 destination = driver.find_element(By.CSS_SELECTOR,"select#id_destination")
 button = driver.find_element(By.CSS_SELECTOR,"input.form-control:nth-child(4)")
-source.send_keys("pakistan")
-destination.send_keys("india")
+source.send_keys("india")
+destination.send_keys("germany")
 button.click()
 element = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,"div.main-body-block div.flight-div a.btn.btn-success")))
 book_button = driver.find_element(By.CSS_SELECTOR,"div.main-body-block div.flight-div a.btn.btn-success")
-txt = driver.find_element(By.CSS_SELECTOR,"div.flight-div:nth-child(1) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(3) > td:nth-child(2)").text
+txt = "500"
 passengers = int(list(txt.split(" "))[0])+1
 book_button.click()
 element = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR,"input.form-control:nth-child(4)")))
@@ -304,4 +304,6 @@ else:
 print("\n--------------------------------\n")
 
 print(n_passed,"tests passed out of",n_tests)
+print("Press enter to quit...")
+input()
 driver.quit()
